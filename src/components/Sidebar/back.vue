@@ -1,49 +1,58 @@
 <template>
-  <!-- <v-app id="inspire"> -->
   <v-navigation-drawer
     v-model="DRAWER_STATE"
     :clipped="$vuetify.breakpoint.lgAndUp"
     app
-    stateless
-    value="true"
   >
-    <v-list-group value="true">
-      <v-list slot="activator">
-        <i class="mdi-building" style="font-size: 24px"></i>
 
-       
-          <v-icon color="red" dark > domain</v-icon>
-          <b style="color: green" class="ml-5">Building</b>
-         
-      </v-list>
-      <v-list dense>
-        <v-list-item-group
-          v-model="group"
-          active-class="light-blue--text text--accent-4"
-        >
-          <template v-for="item in this.items">
-            <v-list-item
-              sub-group
-              :key="item.menu_name"
-              @click="setDataBuilding(item.building_name, item.building_id)"
-            >
-              <v-list-item-action>
-                <v-icon class="ml-3">mdi-home</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.building_name }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
+  
 
-          <v-divider></v-divider>
-        </v-list-item-group>
-      </v-list>
-    </v-list-group>
 
-    <br />
+  
+    <v-list dense>
+      <v-list-item-group
+        v-model="group"
+        active-class="light-blue--text text--accent-4"
+      >
+        <template v-for="item in this.items">
+          <v-list-item
+            :key="item.menu_name"
+            @click="setDataBuilding(item.building_name, item.building_id)"
+          >
+            <v-list-item-action>
+              <v-icon class="ml-3">mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.building_name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+        </template>
+<v-divider></v-divider>
+
+
+ <template v-for="item in this.items1">
+          <v-list-item
+            :key="item.menu_name"
+          
+          >
+            <v-list-item-action>
+              <v-icon class="ml-3">mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+        </template>
+      </v-list-item-group> </v-list
+    ><br />
     <!-- {{ group }} -->
+
+
+             
   </v-navigation-drawer>
+
 
   <!-- <v-navigation-drawer
     app
@@ -145,17 +154,6 @@ export default {
       value1: [],
       dataFull: [],
       group: null,
-
-      admins: [
-        ["Management", "people_outline"],
-        ["Settings", "settings"],
-      ],
-      cruds: [
-        ["Create", "add"],
-        ["Read", "insert_drive_file"],
-        ["Update", "update"],
-        ["Delete", "delete"],
-      ],
       items: [
         // {
         //   building_id: "ffb9567c-e6e0-4509-8d78-8a059f43ea00",
@@ -175,25 +173,27 @@ export default {
         // },
       ],
 
-      items1: [
-        // { title: 'Data Table', icon: 'mdi-table', link: '/dashboard' },
-        // { title: 'LiveVideo', icon: ' mdi-video', link: '/typography' },
-        { title: "Manage User", icon: "mdi-face", link: "/tables" },
-        // { title: 'Picture', icon: 'mdi-image', link: '/notifications' },
-        // //  { title: 'Maps', icon: 'mdi-circle-small', link: '/maps'},
-        //   // { title: 'Profile', icon: '  mdi-account-box', link: '/Profile'},
-        // {
-        //   // title: 'UI Elements',
-        //   // icon: 'mdi-image-filter-none',
-        //   link: '/icons',
-        //   model: false,
-        //   // children: [
-        //   //   { title: 'Icons', icon: 'mdi-circle-small', link: '/icons'},
-        //   //   { title: 'Charts', icon: 'mdi-circle-small', link: '/charts'},
-        //   //   { title: 'Maps', icon: 'mdi-circle-small', link: '/maps'},
-        //   // ],
-        // },
-      ],
+items1: [
+          // { title: 'Data Table', icon: 'mdi-table', link: '/dashboard' },
+          // { title: 'LiveVideo', icon: ' mdi-video', link: '/typography' },
+          { title: 'Manage User', icon: 'mdi-face', link: '/tables' }
+          // { title: 'Picture', icon: 'mdi-image', link: '/notifications' },
+          // //  { title: 'Maps', icon: 'mdi-circle-small', link: '/maps'},
+          //   // { title: 'Profile', icon: '  mdi-account-box', link: '/Profile'},
+          // {
+          //   // title: 'UI Elements',
+          //   // icon: 'mdi-image-filter-none',
+          //   link: '/icons',
+          //   model: false,
+          //   // children: [
+          //   //   { title: 'Icons', icon: 'mdi-circle-small', link: '/icons'},
+          //   //   { title: 'Charts', icon: 'mdi-circle-small', link: '/charts'},
+          //   //   { title: 'Maps', icon: 'mdi-circle-small', link: '/maps'},
+          //   // ],
+          // },
+         
+
+        ],
       items2: [
         // { title: "main", icon: "mdi-home", link: "/dashboard" },
         // { title: "OTA", icon: "mdi-home", link: "/OTA" },
@@ -246,16 +246,17 @@ export default {
     },
   },
   methods: {
-    
     setDataBuilding(name, id) {
+      
       this.axios
-        .get(
-          "http://203.151.199.181:5002/admin/api/v1/floor/get?building_id=" + id
-        )
+        .get("http://203.151.199.181:5002/admin/api/v1/floor/get?building_id="+ id)
         .then((res) => {
           this.value1 = res.data.data;
           // console.log(this.value1);
-          this.$store.commit("data_floor", res.data.data);
+          this.$store.commit("data_floor",res.data.data)
+     
+        
+
         });
 
       this.$store.commit("up", name);
@@ -272,7 +273,9 @@ export default {
           this.dataFull = res.data.data;
           // alert(this.dataFull)
           this.items = res.data.data;
+      
         });
+     
     },
 
     ...mapActions(["TOGGLE_DRAWER"]),

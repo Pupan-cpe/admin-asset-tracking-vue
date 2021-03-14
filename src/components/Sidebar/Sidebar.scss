@@ -1,6 +1,21 @@
 @import "src/styles/variables";
 
+
+[b1], .b1 { border: 1px dashed red; }
+
+.list__tile {
+    height: auto;
+    min-height: 48px;
+}
+
+.list__tile__title {
+    white-space: normal !important;
+    text-overflow: wrap !important;
+    word-wrap: break-word;
+}
+
 .v-navigation-drawer {
+
   top: 64px!important;
   height: calc(100vh - 64px)!important;
 
@@ -65,6 +80,7 @@
 }
 
 .v-navigation-drawer--temporary.v-navigation-drawer--clipped {
+ 
   z-index: 5;
 }
 

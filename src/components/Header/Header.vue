@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="main-header" height="64" fixed color="primary" dark>
+  <v-app-bar class="main-header" height="64" fixed color="teal" dark>
     <v-btn icon class="mx-1" @click.stop="TOGGLE_DRAWER">
       <template v-if="DRAWER_STATE">
         <v-icon style="font-size: 28px">mdi-arrow-left</v-icon>
@@ -8,10 +8,10 @@
         <v-icon style="font-size: 28px">mdi-menu</v-icon>
       </template>
     </v-btn>
-    <v-toolbar-title>Welcome</v-toolbar-title>
+    <v-toolbar-title>Admin-Asset-tacking</v-toolbar-title>
     <v-spacer></v-spacer>
 
-    <Search />
+  
 
     <v-menu offset-y bottom nudge-bottom="10" left>
       <v-list>
@@ -76,17 +76,17 @@
 
 import { mapActions, mapState } from "vuex";
 import config from "../../config";
-import Search from "@/components/Search/Search";
+
 
 export default {
   name: "Header",
-  components: { Search },
+  
   data: () => ({
     config,
     searchCollapse: true,
 
     account: [
-      { text: "Profile", icon: "mdi-account", color: "textColor" }
+      // { text: "Profile", icon: "mdi-account", color: "textColor" }
 
       
     ],

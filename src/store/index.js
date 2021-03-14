@@ -8,20 +8,24 @@ export default new Vuex.Store({
   namespace: true,
   state: {
     drawer: true,
-    test_menu: '',
-    dataFloor: []
+    building: '',
+    dataFloor: [],
+    data_floor: []
   },
   mutations: {
     toggleDrawer(state) {
       state.drawer = !state.drawer;
     },
     up(state, val) {
-      state.test_menu = val;
+      state.building = val;
     },
     upDateDataFlooor(state, val) {
       state.dataFloor = val
-
-    }
+    },
+    data_floor(state, val) {
+      // console.log("test_data=>from side",val)
+      state.data_floor = val
+    },
   },
   actions: {
     TOGGLE_DRAWER({ commit }) {

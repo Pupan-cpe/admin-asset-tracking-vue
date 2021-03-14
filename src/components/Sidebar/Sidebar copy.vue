@@ -6,41 +6,43 @@
     app
     stateless
     value="true"
+   
   >
-    <v-list-group value="true">
-      <v-list slot="activator">
-        <i class="mdi-building" style="font-size: 24px"></i>
 
-       
-          <v-icon color="red" dark > domain</v-icon>
-          <b style="color: green" class="ml-5">Building</b>
-         
-      </v-list>
-      <v-list dense>
-        <v-list-item-group
-          v-model="group"
-          active-class="light-blue--text text--accent-4"
-        >
-          <template v-for="item in this.items">
-            <v-list-item
-              sub-group
-              :key="item.menu_name"
-              @click="setDataBuilding(item.building_name, item.building_id)"
-            >
-              <v-list-item-action>
-                <v-icon class="ml-3">mdi-home</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.building_name }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
+  
+     <v-icon color="red"> mdi-home
+    </v-icon>
+    <v-list-group  value="true">
+      
+  <v-list dense>
+      <v-list-item-group
+        v-model="group"
+        active-class="light-blue--text text--accent-4"
+      >
+        <template v-for="item in this.items">
+          <v-list-item
+            sub-group
+            :key="item.menu_name"
+            @click="setDataBuilding(item.building_name, item.building_id)"
+          >
+            <v-list-item-action>
+              <v-icon class="ml-3">mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.building_name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
 
-          <v-divider></v-divider>
-        </v-list-item-group>
-      </v-list>
+        <v-divider></v-divider>
+
+     
+      </v-list-item-group> </v-list>
+
+
+      
     </v-list-group>
-
+  
     <br />
     <!-- {{ group }} -->
   </v-navigation-drawer>
@@ -246,7 +248,9 @@ export default {
     },
   },
   methods: {
-    
+    aa() {
+      console.log("pass");
+    },
     setDataBuilding(name, id) {
       this.axios
         .get(

@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
+doc
+backup.vue
 
 # local env files
 .env.local
