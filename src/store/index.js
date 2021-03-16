@@ -10,12 +10,18 @@ export default new Vuex.Store({
     drawer: true,
     building: '',
     dataFloor: [],
-    data_floor: []
+    data_floor: [],
+    building_id:''
   },
   mutations: {
     toggleDrawer(state) {
       state.drawer = !state.drawer;
     },
+
+    building_id(state, val) {
+      state.building_id = val;
+    },
+
     up(state, val) {
       state.building = val;
     },

@@ -37,12 +37,30 @@
           </template>
 
           <v-divider></v-divider>
+           <!-- <v-list-item-group
+        v-model="selectedItem"
+        color="primary"
+      >
+        <v-list-item
+          v-for="(item, i) in items3"
+          :key="i"
+        >
+          <v-list-item-icon>
+            <v-icon v-text="item.icon"></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+      </v-list-item-group> -->
         </v-list-item-group>
       </v-list>
     </v-list-group>
 
-    <br />
+  
     <!-- {{ group }} -->
+  
   </v-navigation-drawer>
 
   <!-- <v-navigation-drawer
@@ -156,6 +174,13 @@ export default {
         ["Update", "update"],
         ["Delete", "delete"],
       ],
+
+      items3: [
+        { text: 'Real-Time', icon: 'mdi-clock' },
+        { text: 'Audience', icon: 'mdi-account' },
+        { text: 'Conversions', icon: 'mdi-flag' },
+      ],
+
       items: [
         // {
         //   building_id: "ffb9567c-e6e0-4509-8d78-8a059f43ea00",
@@ -248,6 +273,8 @@ export default {
   methods: {
     
     setDataBuilding(name, id) {
+
+  
       this.axios
         .get(
           "http://203.151.199.181:5002/admin/api/v1/floor/get?building_id=" + id
@@ -255,6 +282,8 @@ export default {
         .then((res) => {
           this.value1 = res.data.data;
           // console.log(this.value1);
+          // console.log(this.value1);
+          this.$store.commit("building_id", id);
           this.$store.commit("data_floor", res.data.data);
         });
 
@@ -266,13 +295,17 @@ export default {
     },
 
     async getUsers() {
-      this.axios
+     this.axios 
         .get("http://203.151.199.181:5002/admin/api/v1/building/get")
         .then((res) => {
           this.dataFull = res.data.data;
           // alert(this.dataFull)
+          // console.log(this.dataFull);
           this.items = res.data.data;
+          // alert(this.items)
+          console.log(this.items);
         });
+
     },
 
     ...mapActions(["TOGGLE_DRAWER"]),

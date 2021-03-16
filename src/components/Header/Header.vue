@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="main-header" height="64" fixed color="teal" dark>
+  <v-app-bar class="main-header" height="64" fixed color="#59bd14" dark>
     <v-btn icon class="mx-1" @click.stop="TOGGLE_DRAWER">
       <template v-if="DRAWER_STATE">
         <v-icon style="font-size: 28px">mdi-arrow-left</v-icon>
