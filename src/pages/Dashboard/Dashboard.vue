@@ -104,9 +104,7 @@
                 </template>
                 <v-card>
                   <v-card-title>
-                    <span class="headline"
-                      >{{ formTitle1 }} {{ item.floor_name }}
-                    </span>
+                    <span class="headline">{{ formTitle1 }} {{ item }} </span>
                   </v-card-title>
 
                   <!-- <v-card-title>
@@ -140,7 +138,7 @@
                       @click="close1"
                       required
                     >
-                      ยกเลิก1
+                      ยกเลิก
                     </v-btn>
                     <!-- <v-btn color="blue darken-1" text @click="close">
                     ยกเลิก
@@ -152,7 +150,7 @@
                       @click="save1"
                       required
                     >
-                      ตกลง1
+                      ตกลง
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -212,15 +210,29 @@
 
     <v-dialog v-model="dialogDelete" max-width="500px">
       <v-card>
-        <v-card-title class="headline"
-          >Are you sure you want to delete this item?</v-card-title
-        >
+        <v-card-title class="headline">คุณแน่ใจว่าจะลบ </v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+          <v-btn color="red" dark class="mb-2" @click="closeDelete" required>
+            ยกเลิก
+          </v-btn>
+          <!-- <v-btn color="blue darken-1" text @click="close">
+                    ยกเลิก
+                  </v-btn> -->
+          <v-btn
+            color="green"
+            dark
+            class="mb-2"
+            @click="deleteItemConfirm"
+            required
+          >
+            ตกลง
+          </v-btn>
+
+          <!-- <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
           <v-btn color="blue darken-1" text @click="deleteItemConfirm"
             >OK</v-btn
-          >
+          > -->
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -303,7 +315,7 @@ export default {
       return this.editedIndex === -1 ? "เพิ่มชั้น" : "แก้ไขชั้น";
     },
     formTitle1() {
-      console.log("--------", this.editedIndex1);
+      // console.log("--------", this.editedIndex1);
       return this.editedIndex1 === -1 ? "เพิ่มห้อง" : "แก้ไขห้อง";
     },
   },
@@ -326,15 +338,27 @@ export default {
   created() {},
 
   methods: {
+    getfloor() {
+      this.axios
+        .get(
+          "http://203.151.199.181:5002/admin/api/v1/floor/get?building_id=" +
+            this.$store.state.building_id
+        )
+        .then((res) => {
+          // console.log(this.value1);
+          // console.log("sidebar ",this.value1);
+          console.log("get floor", res.data.data);
+
+          this.$store.commit("data_floor", res.data.data);
+        });
+    },
+
     validate() {
       this.$refs.form.validate();
     },
 
     getRoom(item) {
-      // console.log(item);
-      // this.room_id = item.item.room_id;
-      // console.log('ss',this.room_id);
-      console.log(item.items);
+     
       this.floor_id = item.item.floor_id;
       // console.log(item.item.floor_id);
 
@@ -390,7 +414,9 @@ export default {
               this.close1();
               // location.reload();
             } else {
+              this.getfloor();
               this.getRoom({ item: { floor_id: this.floor_id } });
+
               // console.log("statu", res.data.status);
               swal("อัพเดทข้อมูลสำเร็จ!", "", "success");
               // if (res.data.status === "fail") {
@@ -413,10 +439,11 @@ export default {
             console.log(res.data);
             if (res.data.status === "fail") {
               alert("ข้อมูลซ้ำกันไม่สามารถเพิ่มตึกได้");
-             
+
               this.close1();
               // location.reload();
             } else {
+              this.getfloor();
               this.getRoom({ item: { floor_id: this.floor_id } });
               swal("เพิ่มห้องสำเร็จ", "", "success");
               this.close1();
@@ -446,6 +473,7 @@ export default {
     close() {
       this.dialog = false;
       this.$nextTick(() => {
+        // console.log("insert_floor", i);
         this.insert_floor = Object.assign({}, this.defaultItem);
 
         this.editedIndex = -1;
@@ -472,11 +500,11 @@ export default {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.message === "delete_floor_fail"){
-             swal("ไม่สามารถลบข้อมูลได้", "", "error");
-          }else{
-          // console.log("statu", res.data.status);
-          swal("ลบข้อมูลสำเร็จ!", "", "success");
+          if (res.data.message === "delete_floor_fail") {
+            swal("ไม่สามารถลบข้อมูลได้", "", "error");
+          } else {
+            // console.log("statu", res.data.status);
+            swal("ลบข้อมูลสำเร็จ!", "", "success");
           }
         });
     },
@@ -512,8 +540,7 @@ export default {
             // console.log("statu", res.data.status);
             swal("ลบข้อมูลสำเร็จ!", "", "success");
           } else {
-
-           swal("Good job!", "You clicked the button!", "error");
+            swal("Good job!", "You clicked the button!", "error");
           }
         });
     },
@@ -547,30 +574,40 @@ export default {
           .then((res) => {
             console.log(res.data);
             if (res.data.message === "duplicate_floor_name") {
-              alert("ข้อมูลซ้ำไม่สามารถแก้ไขตึกได้");
-              
+              alert("ข้อมูลซ้ำไม่สามารถแก้ไขชั้นได้");
+
               // location.reload();
             }
             // console.log("statu", res.data.status);
             swal("อัพเดทข้อมูลสำเร็จ!", "", "success");
+            this.getfloor();
           });
       } else {
+        // ---------insert floor ------------------------------------------
         this.$store.state.data_floor.push(this.editedItem);
-        console.log("save", this.$store.state.data_floor);
+        // console.log("save", this.$store.state.data_floor);
         this.axios
           .post("http://203.151.199.181:5002/admin/api/v1/floor/insert", {
             building_id: this.$store.state.building_id,
             floor_name: this.editedItem.floor_name,
           })
           .then((res) => {
-            console.log("statu", res.data);
-
+            // console.log("statu", res.data);
+            this.getfloor();
             if (res.data.message === "duplicate_floor_name") {
-              alert("ข้อมูลซ้ำกันไม่สามารถเพิ่มตึกได้");
-               location.reload();
+              alert("ข้อมูลซ้ำกันไม่สามารถเพิ่มชั้นได้");
+              //  this.getfloor();
             }
           });
+
+        // this.getUsers();
+
+        // var smallData = this.items.filter((val) => {
+        //   return val.building_name == name;
+        // });
+        // this.$store.commit("upDateDataFlooor", smallData);
       }
+
       this.close();
     },
   },

@@ -10,8 +10,9 @@ export default new Vuex.Store({
     drawer: true,
     building: '',
     dataFloor: [],
+    // data_floor1: [],
     data_floor: [],
-    building_id:''
+    building_id: ''
   },
   mutations: {
     toggleDrawer(state) {
@@ -25,6 +26,11 @@ export default new Vuex.Store({
     up(state, val) {
       state.building = val;
     },
+
+    // api_floor(state, val) {
+    //   state.data_floor1 = val;
+
+    // },
     upDateDataFlooor(state, val) {
       state.dataFloor = val
     },

@@ -10,10 +10,15 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 import { DatePicker } from 'ant-design-vue';
+import VueLocalStorage from 'vue-localstorage'
 
-Vue.use(VueAxios,axios)
+Vue.use(VueAxios, axios)
 Vue.use(DatePicker);
 Vue.use(Toast);
+Vue.use(VueLocalStorage, {
+  name: 'ls',
+  bind: true //created computed members from your variable declarations
+})
 
 
 

@@ -17,9 +17,9 @@
                   <v-tab :href="`#tab-login`">
                     LOGIN
                   </v-tab>
-                  <v-tab :href="`#tab-newUser`">
+                  <!-- <v-tab :href="`#tab-newUser`">
                     New User
-                  </v-tab>
+                  </v-tab> -->
 
                   <v-tab-item :value="'tab-login'" >
                     <v-form>
@@ -40,7 +40,7 @@
                             <v-col>
                               <v-text-field
                                   v-model="email"
-                                  :rules="emailRules"
+                              
                                   value="admin@flatlogic.com"
                                   label="Email Address"
                                   required
@@ -91,7 +91,7 @@
                               ></v-text-field>
                               <v-text-field
                                   v-model="createEmail"
-                                  :rules="emailRules"
+                                  
                                   label="Email Address"
                                   required
                               ></v-text-field>
@@ -135,7 +135,7 @@
             </v-col>
             <v-col cols="12" class="d-flex justify-center">
               <v-footer>
-                <div class="primary--text">© 2014-2020 <a href="https://flatlogic.com/" class="text-decoration-none">Flatlogic</a>, LLC. All rights reserved.</div>
+                <!-- <div class="primary--text">©  <a href="https://flatlogic.com/" class="text-decoration-none">Flatlogic</a>, LLC. All rights reserved.</div> -->
               </v-footer>
             </v-col>
           </v-row>
@@ -152,10 +152,10 @@
     data() {
       return {
         email: 'admin@flatlogic.com',
-        emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+/.test(v) || 'E-mail must be valid',
-        ],
+        // emailRules: [
+        //   v => !!v || 'E-mail is required',
+        //   v => /.+@.+/.test(v) || 'E-mail must be valid',
+        // ],
         createFullName: 'John Smith',
         createEmail: 'john@flatlogic.com',
         createPassword: '123456',

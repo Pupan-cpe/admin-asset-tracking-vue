@@ -119,8 +119,9 @@ export default {
 
     ...mapActions(["TOGGLE_DRAWER"]),
     logOut: function() {
-      
-      window.localStorage.setItem("authenticated", false);
+      console.log("logout");
+      // window.localStorage.remove("authenticated");
+      this.$ls.remove('authenticated')
       this.$router.push("/login");
       
     },

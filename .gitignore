@@ -2,7 +2,8 @@
 node_modules
 doc
 backup.vue
-
+Sidebar copy.vue
+back.vue
 # local env files
 .env.local
 .env.*.local
